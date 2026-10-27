@@ -1,0 +1,12 @@
+{
+  "name": "investigation-room",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w @investigation-room/api\" \"npm run dev -w @investigation-room/web\"",
+    "build": "npm run build -w @investigation-room/api && npm run build -w @investigation-room/web",
+    "test": "npm run test -w @investigation-room/api"
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}
