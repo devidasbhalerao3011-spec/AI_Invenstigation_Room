@@ -51,3 +51,22 @@
 .audit-search-bar input:focus{border-color:#53c8d6}
 .evidence-del-btn{background:transparent;border:1px solid #43252a;color:#ea7279;border-radius:6px;padding:5px 9px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s}
 .evidence-del-btn:hover{background:#38191e;border-color:#ee6e76;color:#ffa1a7}
+.engine-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;padding:3px 8px;border-radius:999px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s;border:1px solid transparent}
+.engine-badge.browser{background:#132822;color:#5fd1a6;border-color:#204e3f}
+.engine-badge.browser:hover{background:#18362d;border-color:#347b63}
+.engine-badge.api{background:#17283c;color:#6dbff2;border-color:#2a4a6e}
+.engine-badge.api:hover{background:#1e3550;border-color:#3d6c9f}
+.engine-dot{width:6px;height:6px;border-radius:50%}
+.engine-dot.browser{background:#4dd99a;box-shadow:0 0 8px #4dd99a88}
+.engine-dot.api{background:#4fa8f0;box-shadow:0 0 8px #4fa8f088}
+.splash-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:16px}
+.settings-modal{max-width:480px;width:95%}
+.settings-option{display:flex;align-items:flex-start;gap:12px;padding:12px;background:#10141b;border:1px solid #28313e;border-radius:8px;cursor:pointer;transition:all .15s;text-align:left}
+.settings-option:hover{border-color:#486380}
+.settings-option.selected{border-color:#3db8cc;background:#132029}
+.settings-option input[type=radio]{margin-top:3px}
+.settings-option b{display:block;font-size:12px;color:#e8eef6;margin-bottom:3px}
+.settings-option p{font-size:11px;color:#8592a3;line-height:1.4}
+.test-conn-btn{background:#182531;border:1px solid #334658;color:#a0d7e4;padding:7px 12px;border-radius:6px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.test-conn-btn:hover{background:#223647;border-color:#498099}
+
