@@ -248,15 +248,19 @@ function App() {
   async function createCase(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
+    const rawType = String(f.get('type') || '').trim();
+    const customType = String(f.get('customType') || '').trim();
+    const resolvedType = (rawType === 'Other' && customType ? customType : rawType) || 'Fraud review';
+
     try {
       const c = await client.createCase(name, {
         title: String(f.get('title') || 'Untitled Case'),
-        type: String(f.get('type') || 'Fraud review'),
+        type: resolvedType,
         priority: (String(f.get('priority') || 'normal')) as Priority,
         summary: String(f.get('summary') || '')
       });
       setModal(null);
-      notify('Case created and audit event recorded.');
+      notify(`Case created (${resolvedType}) and audit event recorded.`);
       await load();
       openCase(c);
     } catch (err: any) {
@@ -1861,6 +1865,9 @@ function Modal({
   submit: (e: FormEvent<HTMLFormElement>) => void;
 }) {
   const isCase = type === 'case';
+  const [caseType, setCaseType] = useState('Fraud review');
+  const [customType, setCustomType] = useState('');
+
   return (
     <div className="modal-backdrop">
       <form className="modal" onSubmit={submit}>
@@ -1883,12 +1890,44 @@ function Modal({
           <>
             <label>
               Case type
-              <select name="type">
-                {['Fraud review', 'Cyber incident', 'Missing property', 'Digital forensics'].map(x => (
-                  <option key={x}>{x}</option>
+              <select
+                value={caseType}
+                onChange={e => {
+                  setCaseType(e.target.value);
+                  if (e.target.value !== 'Other') {
+                    setCustomType('');
+                  }
+                }}
+              >
+                {['Fraud review', 'Cyber incident', 'Missing property', 'Digital forensics', 'Other'].map(x => (
+                  <option key={x} value={x}>
+                    {x}
+                  </option>
                 ))}
               </select>
             </label>
+
+            {/* Hidden field that delivers the resolved case type */}
+            <input
+              type="hidden"
+              name="type"
+              value={caseType === 'Other' ? (customType.trim() || 'Other') : caseType}
+            />
+
+            {caseType === 'Other' && (
+              <label className="custom-type-field">
+                Custom case type
+                <input
+                  name="customType"
+                  autoFocus
+                  required
+                  value={customType}
+                  onChange={e => setCustomType(e.target.value)}
+                  placeholder="Enter custom case type (e.g. Insider Threat, Bribery, Espionage…)"
+                  maxLength={60}
+                />
+              </label>
+            )}
             <label>
               Priority
               <select name="priority">

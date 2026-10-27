@@ -69,4 +69,7 @@
 .settings-option p{font-size:11px;color:#8592a3;line-height:1.4}
 .test-conn-btn{background:#182531;border:1px solid #334658;color:#a0d7e4;padding:7px 12px;border-radius:6px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
 .test-conn-btn:hover{background:#223647;border-color:#498099}
+.custom-type-field{animation:customTypeReveal .22s cubic-bezier(0.16,1,0.3,1);border-left:2px solid #53c8d6;padding-left:10px;margin-top:2px}
+@keyframes customTypeReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
 
